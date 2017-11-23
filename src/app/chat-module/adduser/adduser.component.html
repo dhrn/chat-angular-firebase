@@ -1,0 +1,163 @@
+<div class="main">
+  <div class="header" >
+    <h1>Login or Create an Account!</h1>
+  </div>
+ <hr/>
+    <ul class="left-form">
+      <form #formData="ngForm" (ngSubmit)="Adduser(formData.value)">
+        <li>
+          <input type="text" placeholder="username" required minlength="4" [(ngModel)]="usernameofsignup" maxlength="10" #nameref="ngModel" name="username"  ngModel>
+          <div class="clear"> </div>
+          <div *ngIf="nameref.errors && (nameref.dirty||nameref.touched)">
+            <div [hidden]="!nameref.errors.required">
+              please enter your user name
+            </div>
+            <div [hidden]="!nameref.errors.minlength">
+              please enter your user name with minimum length 4
+            </div>
+            <div [hidden]="!nameref.errors.maxLength">
+              please enter your name with maximum length 10
+            </div>
+
+          </div>
+          <div *ngIf="usernamesrror" class="error">
+          Alreay registered. please select some other user
+          </div>
+        </li>
+
+        <li>
+          <input type="text"   placeholder="Name"  minlength="6" maxlength="15" #name="ngModel" required name="name" ngModel>
+          <div class="clear"> </div>
+          <div *ngIf="name.errors && (name.dirty||name.touched)">
+            <div [hidden]="!name.errors.required">
+              please enter your name and family name
+            </div>
+            <div [hidden]="!name.errors.minlength">
+              please enter your user with minimum length 6
+            </div>
+            <div [hidden]="!name.errors.maxLength">
+              please enter your name with maximum length 15
+            </div>
+
+          </div>
+        </li>
+
+       <li>
+          <input type="email"   placeholder="E-mail" #email="ngModel" required name="email" ngModel>
+          <div class="clear"> </div>
+         <div *ngIf="email.errors && (email.dirty||email.touched)">
+           <div [hidden]="!email.errors.required">
+             please enter email
+           </div>
+         </div>
+       </li>
+
+        <li>
+          <input type="number"   placeholder="Age" required min="15" max="40" #age="ngModel" required name="age" ngModel>
+          <div class="clear"> </div>
+          <div *ngIf="age.errors && (age.dirty||age.touched)">
+            <div [hidden]="!age.errors.required">
+              please enter your age
+            </div>
+            <div [hidden]="!age.errors.min">
+              please enter age with minimum length 15
+            </div>
+            <div [hidden]="!age.errors.max">
+              please enter age with maximum length 40
+            </div>
+
+          </div>
+        </li>
+
+        <div class="select-box">
+          <label  class="label select-box1"><span class="label-desc">Choose your gender</span> </label>
+          <select  class="select" required name="gender" ngModel>
+            <option *ngFor="let g of gender" value="{{g}}">{{g}}</option>
+          </select>
+        </div>
+
+        <li>
+          <input type="password"   placeholder="password"  minlength="6" maxlength="15" #passwd="ngModel" required name="password" ngModel>
+          <div class="clear"> </div>
+          <div *ngIf="passwd.errors && (passwd.dirty||passwd.touched)">
+            <div [hidden]="!passwd.errors.required">
+              please enter Password
+            </div>
+            <div [hidden]="!passwd.errors.minLength">
+              enter password with minimum length 15
+            </div>
+            <div [hidden]="!passwd.errors.maxLength">
+              enter password with maximum length 40
+            </div>
+
+          </div>
+        </li>
+
+        <!--<li>-->
+          <!--<input type="file" name="dp" (change)="fileEvent($event)" accept='image/*'/>-->
+          <!--<div class="clear"> </div>-->
+
+          <!--<div *ngIf="!profilepicture" class="error">-->
+            <!--Please Choose profile Picture-->
+          <!--</div>-->
+          <!--<div class="meter" *ngIf="begin">-->
+            <!--<span style="width: {{progress}}"></span>-->
+            <!--<p></p>-->
+          <!--</div>-->
+        <!--</li>-->
+
+        <li>
+          <button [disabled]="!formData.form.valid">Getting Started</button>
+        </li>
+      </form>
+    </ul>
+    <ul class="right-form">
+      <h3>Login:</h3>
+      <!--<form #formLogin="ngForm" (ngSubmit)="LogIN(formLogin.value)">-->
+
+        <!--<li>-->
+          <!--<input type="text"   placeholder="username" [(userid)] #lemail="ngModel" required name="loginusername" ngModel/>-->
+          <!--<div class="clear"> </div>-->
+          <!--<div *ngIf="lemail.errors && (lemail.dirty||lemail.touched)">-->
+            <!--<div [hidden]="!lemail.errors.required">-->
+              <!--please enter email-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</li>-->
+
+        <!--<li>-->
+          <!--<input type="password"   placeholder="password" required minlength="6" maxlength="15" #lpasswd="ngModel"  name="userpassword" ngModel/>-->
+          <!--<div class="clear">   </div>-->
+          <!--<div *ngIf="lpasswd.errors && (lpasswd.dirty||lpasswd.touched)">-->
+            <!--<div [hidden]="!lpasswd.errors.required">-->
+              <!--please enter password-->
+            <!--</div>-->
+            <!--<div [hidden]="!lpasswd.errors.minLength">-->
+              <!--enter password with minimum length 15-->
+            <!--</div>-->
+            <!--<div [hidden]="!lpasswd.errors.maxLength">-->
+              <!--enter password with maximum length 40-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</li>-->
+
+        <!--<li>-->
+          <!--<button [disabled]="!formLogin.form.valid"  type="submit">Sign In</button>-->
+        <!--</li>-->
+      <!--</form>-->
+        <li>
+        <input type="text" placeholder="Enter your User Name" [(ngModel)]="userid">
+        <div class="clear"> </div>
+        </li>
+      <li>
+        <input type="password" placeholder="Enter your PassCode" [(ngModel)]="passcode">
+        <div class="clear"> </div>
+      </li>
+        <button (click)="LogIN()">Click here to sign in</button>
+
+    </ul>
+
+</div>
+<!-----//end-copyright---->
+<!--<div> {{ (user | async)?.uid }} </div>-->
+<button class="loginBtn loginBtn--google" (click)="logingoogle()">Login or Signup With Google</button>

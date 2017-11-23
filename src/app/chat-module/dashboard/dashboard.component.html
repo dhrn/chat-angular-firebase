@@ -1,0 +1,50 @@
+<div class="body-wrapper">
+  <div class="panel">
+    <div class="view">
+      <div class="sub-title">Welcome Again!</div>
+      <div class="main-title">{{name?.name}}<i class="em em---1"></i></div>
+      <hr/>
+
+      <!-- Primary-colored flat button -->
+      <button  (click)="gotochat()" class="mdl-button mdl-js-button mdl-button--primary">
+        Continue Your Chat
+      </button>
+      <button  (click)="EditProfile()" class="mdl-button mdl-js-button mdl-button--primary">
+            Edit Profile
+      </button>
+      <button  (click)="signout()" class="mdl-button mdl-js-button mdl-button--primary">
+            SignOut
+      </button>
+        <!-- profile Change Begins-->
+        <div class="mdl-layout mdl-js-layout mdl-color--grey-100">
+            <main class="mdl-layout__content">
+                <div class="mdl-grid">
+                    <div class="mdl-card mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-shadow--2dp">
+                        <figure class="mdl-card__media" >
+                            <img  src="{{dp}}" height="150" width="100%"/>
+                        </figure>
+                        <div class="mdl-card__title">
+                            <h1 class="mdl-card__title-text">{{dname}}</h1>
+                        </div>
+                        <div *ngIf="dstatus">
+                            <hr/>
+                            <span>{{dstatus}}</span>
+                        </div>
+                        <div class="mdl-card__supporting-text">
+                            <p>{{dgender}}</p>
+                        </div>
+                        <div class="mdl-card__actions mdl-card--border">
+                            <button [hidden]="!dstart" (click)="addnewchat()" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">start</button>
+                            <div class="mdl-layout-spacer"></div>
+                            <button (click)="next()" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">next</button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+
+    </div>
+
+  </div>
+</div>

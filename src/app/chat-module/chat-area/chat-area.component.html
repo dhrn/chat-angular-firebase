@@ -1,0 +1,168 @@
+<!--<div class="container">-->
+<!--<div class="people-list" id="people-list">-->
+<!--<ul class="list">-->
+<!--<li class="clearfix" *ngFor="let item of items | async" (click)="onSelect(item)">-->
+<!--<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01.jpg" alt="avatar" />-->
+<!--<div class="about">-->
+<!--<div class="name">{{item?.$key}}</div>-->
+<!--<div class="status">-->
+<!--<i class="fa fa-circle online"></i> online-->
+<!--</div>-->
+<!--</div>-->
+<!--</li>-->
+
+<!--</ul>-->
+<!--</div>-->
+
+<!--</div> &lt;!&ndash; end container &ndash;&gt;-->
+<div class="chat" *ngIf="suser">
+    <div class="chat-header clearfix">
+        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01_green.jpg" alt="avatar"/>
+
+        <div class="chat-about">
+            <div class="chat-with">{{suser}}</div>
+            <div class="chat-num-messages">already {{userschat.length-1}} messages</div>
+        </div>
+        <i class="fa fa-star"></i>
+    </div> <!-- end chat-header -->
+
+    <div class="chat-history">
+        <ul>
+            <li class="clearfix" *ngFor="let i of userschat">
+                <div *ngIf="suser == i?.to">
+                    <div class="message-data align-right">
+                        <span class="message-data-time">{{i?.time}}</span>
+                        <span class="message-data-name">You</span> <i class="fa fa-circle me"></i>
+
+                    </div>
+                    <div class="message other-message float-right">
+                        {{i?.message}}
+                    </div>
+                </div>
+                <div *ngIf="suser ==i?.from">
+                    <div class="message-data">
+                        <span class="message-data-name"><i class="fa fa-circle online"></i> {{i?.from}}</span>
+                        <span class="message-data-time">{{i?.time}}</span>
+                    </div>
+                    <div class="message my-message">
+                        {{i?.message}}
+                    </div>
+                </div>
+            </li>
+        </ul>
+
+    </div> <!-- end chat-history -->
+
+    <div class="chat-message clearfix">
+        <textarea name="message-to-send" id="message-to-send" placeholder="Type your message" #newmess [(ngModel)]="mess"
+                  rows="3" (keyup.Enter)="newmessage(newmess.value)"></textarea>
+        <i
+                (click)="toggled = !toggled"
+                [(emojiPickerIf)]="toggled"
+                [emojiPickerDirection]="'bottom' || 'top' || 'left' || 'right'"
+                [emojiPickerPreserveSelection]="true || false"
+                [emojiPickerAutofocus]="true || false"
+                (emojiPickerSelect)="handleSelection($event)">😄</i>
+        <button (click)="newmessage(newmess.value)">Send</button>
+
+    </div> <!-- end chat-message -->
+
+</div> <!-- end chat -->
+
+<div class="mdl-grid demo-content">
+
+    <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
+        <h5>Chat Area</h5>
+    </div>
+
+
+    <div class="demo-graphs mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--8-col">
+        <!--Add list-->
+        <ul class="demo-list-three mdl-list">
+            <li *ngFor="let item of items " (click)="onSelect(item)"
+                class="mdl-list__item mdl-list__item--three-line">
+    <span class="mdl-list__item-primary-content">
+        <img src="../../../assets/img/user.jpg" alt=""/>
+    <span>{{item.$key}}</span>
+      <span class="mdl-list__item-text-body">
+      </span>
+    </span>
+            </li>
+        </ul>
+
+        <!-- Colored FAB button with ripple -->
+        <div align="center">
+            <button id="tt3" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored"
+                    (click)="newchat()">
+                <i class="material-icons">add</i>
+            </button>
+            <div class="mdl-tooltip" data-mdl-for="tt3">
+                Add New<strong> Chat</strong>
+            </div>
+            <!-- Colored raised button -->
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" (click)="goback()" >
+                Go Back
+            </button>
+
+        </div>
+    </div>
+
+
+    <!--<div class="demo-cards mdl-cell mdl-cell&#45;&#45;4-col mdl-cell&#45;&#45;8-col-tablet  mdl-grid&#45;&#45;no-spacing" *ngIf="suser">-->
+    <!--<div class="demo-updates mdl-card mdl-shadow&#45;&#45;2dp mdl-cell mdl-cell&#45;&#45;4-col mdl-cell&#45;&#45;4-col-tablet mdl-cell&#45;&#45;12-col-desktop">-->
+    <!--<div class="mdl-card__title">-->
+    <!--<div class="chat-header clearfix">-->
+    <!--<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01_green.jpg" alt="avatar" />-->
+
+    <!--<div class="chat-about">-->
+    <!--<div class="chat-with">{{suser}}</div>-->
+    <!--<div class="chat-num-messages">already {{length-1}} messages</div>-->
+    <!--</div>-->
+    <!--<i class="fa fa-star"></i>-->
+    <!--</div> &lt;!&ndash; end chat-header &ndash;&gt;-->
+
+    <!--</div>-->
+    <!--&lt;!&ndash;Selected User Begin&ndash;&gt;-->
+
+    <!--<ul class="demo-list-three mdl-list">-->
+    <!--<div class="chat-history">-->
+    <!--<ul>-->
+    <!--<li class="clearfix" *ngFor="let i of userschat|async">-->
+    <!--<div *ngIf="suser == i?.to">-->
+    <!--<div class="message-data align-right">-->
+    <!--<span class="message-data-time" >10:10 AM, Today</span>-->
+    <!--<span class="message-data-name" >You</span> <i class="fa fa-circle me"></i>-->
+
+    <!--</div>-->
+    <!--<div class="message other-message float-right">-->
+    <!--{{i?.message}}-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div *ngIf="suser ==i?.from">-->
+    <!--<div class="message-data">-->
+    <!--<span class="message-data-name"><i class="fa fa-circle online"></i> {{i?.from}}</span>-->
+    <!--<span class="message-data-time">10:12 AM, Today</span>-->
+    <!--</div>-->
+    <!--<div class="message my-message">-->
+    <!--{{i?.message}}-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</li>-->
+    <!--</ul>-->
+
+    <!--</div> &lt;!&ndash; end chat-history &ndash;&gt;-->
+
+    <!--</ul>-->
+    <!--&lt;!&ndash;Selected User Ends&ndash;&gt;-->
+    <!--</div>-->
+    <!--</div>-->
+
+</div>
+
+<!--<i-->
+        <!--(click)="toggled = !toggled"-->
+        <!--[(emojiPickerIf)]="toggled"-->
+        <!--[emojiPickerDirection]="'bottom' || 'top' || 'left' || 'right'"-->
+        <!--[emojiPickerPreserveSelection]="true || false"-->
+        <!--[emojiPickerAutofocus]="true || false"-->
+        <!--(emojiPickerSelect)="handleSelection($event)">😄</i>-->
